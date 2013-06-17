@@ -150,6 +150,88 @@ public static void calcNextCell(int tmp[][],int x, int y){
 	else
 		tmp[x][y] = 0;
 }
+
+/**
+ * Wyznacza sume sasiadow zywych dla danej komorki
+ * @param x x komorki
+ * @param y y komorki
+ * @return liczba zywych sasiadow
+ */
+private static int calcSum(int x, int y) {
+	int sum = 0;
+	int u[] = new int[3];
+	int d[] = new int[3];
+	int l;
+	int p;
+
+	// System.out.println(x + " " + y);
+
+	// góra:-------------------
+	if (y == 0) {
+		if (x == 0)
+			u[0] = tab[size - 1][size - 1];
+		else
+			u[0] = tab[x - 1][size - 1];
+		u[1] = tab[x][size - 1];
+		if (x == size - 1)
+			u[2] = tab[0][size - 1];
+		else
+			u[2] = tab[x + 1][size - 1];
+	} else {
+		if (x == 0)
+			u[0] = tab[size - 1][y - 1];
+		else
+			u[0] = tab[x - 1][y - 1];
+		u[1] = tab[x][y - 1];
+		if (x == size - 1)
+			u[2] = tab[0][y - 1];
+		else
+			u[2] = tab[x + 1][y - 1];
+	}
+
+	// dó³:------------------
+	if (y == size - 1) {
+		if (x == 0)
+			d[0] = tab[size - 1][0];
+		else
+			d[0] = tab[x - 1][0];
+		d[1] = tab[x][0];
+		if (x == size - 1)
+			d[2] = tab[0][0];
+		else
+			d[2] = tab[x + 1][0];
+	} else {
+		if (x == 0)
+			d[0] = tab[size - 1][y + 1];
+		else
+			d[0] = tab[x - 1][y + 1];
+		d[1] = tab[x][y + 1];
+		if (x == size - 1)
+			d[2] = tab[0][y + 1];
+		else
+			d[2] = tab[x + 1][y + 1];
+	}
+
+	// lewo:-------------------
+	if (x == 0) {
+		l = tab[size - 1][y];
+	} else {
+		l = tab[x - 1][y];
+	}
+
+	// prawo:--------------------
+	if (x == size - 1) {
+		p = tab[0][y];
+	} else {
+		p = tab[x + 1][y];
+	}
+
+	// sumowanie
+	sum = u[0] + u[1] + u[2] + l + 0 + p + d[0] + d[1] + d[2];
+
+	return sum;
+}
+
 /**Rysuje przestrzen
  * @param g obiekt graficzny na ktorym rysujemy
  */
