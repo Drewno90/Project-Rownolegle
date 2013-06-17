@@ -32,6 +32,17 @@ public class CA {
 			for (int j = 0; j < size; j++)
 				tab[i][j] = 0;
 	}
+	
+	public void genNext() {
+
+		long startTime, stopTime;
+		
+		int tmp[][] = new int[size][size];
+		thread = new MyThread[threadNumber];
+		for (int i = 0; i < threadNumber; i++) {
+			thread[i] = new MyThread(size, i, tmp,0,(i+1)*(size/threadNumber));
+		}
+	}
 
 
 }
