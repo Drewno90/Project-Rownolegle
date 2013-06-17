@@ -42,6 +42,26 @@ public class CA {
 		for (int i = 0; i < threadNumber; i++) {
 			thread[i] = new MyThread(size, i, tmp,0,(i+1)*(size/threadNumber));
 		}
+		//Cstartuj licznik
+		startTime = System.nanoTime();
+for (int i = 0; i < threadNumber; i++) {
+	thread[i].start();
+}
+for (int i = 0; i < threadNumber; i++) {
+	try {
+		thread[i].join();
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+
+
+//stopuj licznik
+stopTime = System.nanoTime();
+tab = tmp;
+System.out.println((stopTime - startTime));
 	}
 
 
