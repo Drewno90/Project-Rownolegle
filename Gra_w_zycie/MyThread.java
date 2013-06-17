@@ -22,7 +22,10 @@ public class MyThread extends Thread implements Runnable {
 
 	@Override
 	public void run() {
-
+		for (int i = rowStart; i < rowEnd; i++)
+			for (int y = 0; y < size; y++) {
+				CA.calcNextCell(tmp, i, y);
 			}
+		super.run();
 	}
 }
