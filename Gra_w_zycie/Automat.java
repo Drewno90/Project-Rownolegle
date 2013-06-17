@@ -37,5 +37,18 @@ System.out.println((stopTime - startTime));
 }
 
 	
+public static void calcNextCell(int tmp[][],int x, int y){
+	int sum = calcSum(x, y);
+
+	if (sum == 3 && tab[x][y] == 0)
+		tmp[x][y] = 1;
+	else if ((sum == 3 || sum == 2) && tab[x][y] == 1)
+		tmp[x][y] = 1;
+	else
+		tmp[x][y] = 0;
+}
 	
+
+
+
 }
