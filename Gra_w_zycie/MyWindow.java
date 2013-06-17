@@ -12,6 +12,8 @@ public class MyWindow extends JFrame {
 
 	private JPanel contentPane;
 	public static JComboBox comboBox;
+	public boolean isRun = false;
+	Thread thread;
 	
 	private JTextField textField;
 
@@ -48,11 +50,38 @@ public class MyWindow extends JFrame {
 		contentPane.add(gw);
 
 		final JButton btnStart = new JButton("START");
-		
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (isRun == false) {
+					btnStart.setText("STOP");
+					isRun = true;
+					
+					thread = new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							gw.iterate();
+						}
+					});
+					
+					thread.start();
+				}
+			else{
+				btnStart.setText("START");
+				isRun = false;
+				thread.stop();
+			}
+		}});
 		btnStart.setBounds(85, 44, 89, 23);
 		contentPane.add(btnStart);
 
 		JButton btnGenerateRandomStates = new JButton("Generate random states");
+		btnGenerateRandomStates.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gw.genRandomStates();
+			}
+		});
 		btnGenerateRandomStates.setBounds(24, 159, 209, 23);
 		contentPane.add(btnGenerateRandomStates);
 		
@@ -64,6 +93,11 @@ public class MyWindow extends JFrame {
 		contentPane.add(comboBox);
 		
 		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gw.clear();
+			}
+		});
 		btnClear.setBounds(85, 104, 89, 23);
 		contentPane.add(btnClear);
 		
@@ -72,6 +106,11 @@ public class MyWindow extends JFrame {
 		contentPane.add(lblAdd);
 		
 		textField = new JTextField();
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gw.thickness = Integer.parseInt(textField.getText());
+			}
+		});
 		textField.setText("1");
 		textField.setBounds(111, 254, 86, 20);
 		contentPane.add(textField);
