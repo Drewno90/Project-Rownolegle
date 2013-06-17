@@ -14,6 +14,28 @@ public class Automat {
 				tab[i][j] = 0;
 	}
 
+	//CZAS START
+	startTime = System.nanoTime();
+for (int i = 0; i < threadNumber; i++) {
+thread[i].start();
+}
+for (int i = 0; i < threadNumber; i++) {
+try {
+	thread[i].join();
+} catch (InterruptedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+}
+
+
+
+//CZAS STOP
+stopTime = System.nanoTime();
+tab = tmp;
+System.out.println((stopTime - startTime));
+}
+
 	
 	
 }
