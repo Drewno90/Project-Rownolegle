@@ -139,3 +139,21 @@ System.out.println((stopTime - startTime));
 
 
 }
+
+/**Rysuje przestrzen
+ * @param g obiekt graficzny na ktorym rysujemy
+ */
+public void draw(Graphics g) {
+	g.setColor(Color.BLACK);
+	g.fillRect(0, 0, 500, 500);
+	g.setColor(new Color(255,110,180));
+	for (int x = 0; x < size; x++) {
+		for (int y = 0; y < size; y++) {
+			if (tab[x][y] == 1)
+				g.fillRect(x * GameWindow.WIDTH, y * GameWindow.WIDTH,
+						GameWindow.WIDTH*GameWindow.thickness, GameWindow.WIDTH*GameWindow.thickness);
+
+		}
+	}
+}
+}
